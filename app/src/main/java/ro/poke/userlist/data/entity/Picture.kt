@@ -1,4 +1,4 @@
-package ro.poke.userlist.data
+package ro.poke.userlist.data.entity
 
 import com.google.gson.annotations.SerializedName
 

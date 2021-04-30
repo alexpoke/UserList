@@ -1,17 +1,13 @@
 package ro.poke.userlist.viewmodels
 
-import android.util.Log
-import androidx.databinding.ObservableBoolean
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import ro.poke.userlist.api.UserService
-import ro.poke.userlist.data.User
+import ro.poke.userlist.data.entity.User
+import ro.poke.userlist.data.UserRepository
 import java.util.*
 
 class UserListViewModel () : ViewModel() {
@@ -19,28 +15,17 @@ class UserListViewModel () : ViewModel() {
         mutableListOf()
     ))
 
-//    var loading = ObservableBoolean(false)
+    private var currentSearchResult: Flow<PagingData<User>>? = null
+
     var loading = MutableLiveData<Boolean>(false)
+    var repository = UserRepository()
 
-    init {
-        Log.i("UserListViewModel", "UserListViewModel created!")
-    }
+//    w
 
-    fun loadUsers() {
-        Log.i("UserListViewModel", "Load users")
-        getUsersFromWeb()
-    }
-
-    fun getUsersFromWeb() {
-        loading.value = true
-        viewModelScope.launch(Dispatchers.IO ){
-            var users = UserService.userService.getUsers(0, 100, "abc")
-            withContext(Dispatchers.Main) {
-
-                var users = theUsers.value as MutableList<User> + users.results as MutableList<User>
-                theUsers.postValue( users )
-                loading.value = false;
-            }
-        }
+    fun getUserFlow(): Flow<PagingData<User>> {
+        val newResult: Flow<PagingData<User>> =
+            repository.getUserStream().cachedIn(viewModelScope)
+        currentSearchResult = newResult
+        return newResult
     }
 }

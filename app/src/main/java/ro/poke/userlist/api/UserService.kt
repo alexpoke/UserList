@@ -7,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ro.poke.userlist.data.UserListResponse
+import ro.poke.userlist.data.entity.UserListResponse
 
 /**
  * Used to connect to the Unsplash API to fetch photos

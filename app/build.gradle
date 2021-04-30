@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.3"
 
     buildFeatures {
-        dataBinding = true
+        viewBinding = true
     }
     defaultConfig {
         applicationId "ro.poke.userlist"
@@ -33,7 +33,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-        
+
     }
 }
 
@@ -54,7 +54,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-runtime-ktx:$rootProject.lifecycleVersion"
     implementation "com.squareup.picasso:picasso:$rootProject.picassoVersion"
-
+    implementation "androidx.paging:paging-runtime-ktx:$rootProject.pagingVersion"
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
