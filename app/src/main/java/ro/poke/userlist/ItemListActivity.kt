@@ -27,7 +27,7 @@ import ro.poke.userlist.viewmodels.ItemListViewModel
 class ItemListActivity : AppCompatActivity() {
 
     lateinit var binding: ActivityItemListBinding
-        private set
+
     /**
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.

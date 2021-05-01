@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.appbar.CollapsingToolbarLayout
 import com.squareup.picasso.Picasso
 import ro.poke.userlist.data.entity.User
+import ro.poke.userlist.databinding.ItemDetailBinding
 
 /**
  * A fragment representing a single Item detail screen.
@@ -29,6 +30,7 @@ class ItemDetailFragment : Fragment() {
             if (it.containsKey(ARG_ITEM)) {
                 user = it.getParcelable<User>(ARG_ITEM)
                 activity?.findViewById<CollapsingToolbarLayout>(R.id.toolbar_layout)?.title = user?.name?.first
+
                 val profileView = activity?.findViewById<ImageView>(R.id.detail_image)
                 profileView?.let { Picasso.get()
                     .load(Uri.parse(user?.picture?.large))
@@ -41,14 +43,14 @@ class ItemDetailFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val rootView = inflater.inflate(R.layout.item_detail, container, false)
+        val binding = ItemDetailBinding.inflate(inflater, container, false)
 
         user?.let {
-            rootView.findViewById<TextView>(R.id.item_email).text = it.email
-            rootView.findViewById<TextView>(R.id.item_phone).text = it.phone
+            binding.itemEmail.text = it.email
+            binding.itemPhone.text = it.phone
         }
 
-        return rootView
+        return binding.root
     }
 
     companion object {

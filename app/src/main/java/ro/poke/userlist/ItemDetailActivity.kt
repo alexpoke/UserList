@@ -16,7 +16,7 @@ import ro.poke.userlist.databinding.ItemDetailBinding
  */
 class ItemDetailActivity : AppCompatActivity() {
     lateinit var binding: ActivityItemDetailBinding
-        private set
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityItemDetailBinding.inflate(layoutInflater)
