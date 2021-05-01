@@ -13,17 +13,20 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import ro.poke.userlist.data.entity.User
+import ro.poke.userlist.databinding.ItemListContentBinding
 
 class UserPagingDataAdapter(
             private val parentActivity: ItemListActivity,
             private val picasso: Picasso,
             private val twoPane: Boolean
-            ): PagingDataAdapter<User, UserPagingDataAdapter.ViewHolder>(GalleryDiffCallback()) {
+            ): PagingDataAdapter<User, UserPagingDataAdapter.ViewHolder>(UserDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_list_content, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(ItemListContentBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        ))
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -58,15 +61,14 @@ class UserPagingDataAdapter(
         }
     }
 
-    inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val nameView: TextView = view.findViewById(R.id.tvName)
-        val emailView: TextView = view.findViewById(R.id.tvEmail)
-        val profileView: ImageView = view.findViewById(R.id.ivProfile)
+    class ViewHolder(binding: ItemListContentBinding) : RecyclerView.ViewHolder(binding.root) {
+        val nameView: TextView = binding.tvName
+        val emailView: TextView = binding.tvEmail
+        val profileView: ImageView = binding.ivProfile
     }
-
 }
 
-private class GalleryDiffCallback : DiffUtil.ItemCallback<User>() {
+private class UserDiffCallback : DiffUtil.ItemCallback<User>() {
     override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
         return oldItem.name.first == newItem.name.first && oldItem.name.last == newItem.name.last
     }
