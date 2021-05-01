@@ -1,10 +1,16 @@
 package ro.poke.userlist
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.core.widget.NestedScrollView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.widget.Toolbar
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 import kotlinx.coroutines.Job
 import androidx.lifecycle.lifecycleScope
@@ -12,6 +18,7 @@ import androidx.paging.LoadState
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import ro.poke.userlist.data.entity.User
 import ro.poke.userlist.databinding.ActivityItemListBinding
 
 

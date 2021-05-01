@@ -1,6 +1,8 @@
 package ro.poke.userlist
 
+import android.content.Intent
 import android.net.Uri
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +37,24 @@ class UserPagingDataAdapter(
 
         with(holder.itemView) {
             tag = user
-//                setOnClickListener(onClickListener)
+                setOnClickListener(View.OnClickListener { v ->
+                    if (twoPane) {
+                        val fragment = ItemDetailFragment().apply {
+                            arguments = Bundle().apply {
+                                putParcelable(ItemDetailFragment.ARG_ITEM, user)
+                            }
+                        }
+                        parentActivity.supportFragmentManager
+                            .beginTransaction()
+                            .replace(R.id.item_detail_container, fragment)
+                            .commit()
+                    } else {
+                        val intent = Intent(v.context, ItemDetailActivity::class.java).apply {
+                            putExtra(ItemDetailFragment.ARG_ITEM, user)
+                        }
+                        v.context.startActivity(intent)
+                    }
+                })
         }
     }
 

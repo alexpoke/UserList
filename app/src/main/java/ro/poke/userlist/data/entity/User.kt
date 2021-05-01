@@ -1,7 +1,10 @@
 package ro.poke.userlist.data.entity
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 data class User (
 
 	@SerializedName("gender") val gender : String,
@@ -11,9 +14,9 @@ data class User (
 //	@SerializedName("login") val login : Login,
 //	@SerializedName("dob") val dob : Dob,
 //	@SerializedName("registered") val registered : Registered,
-//	@SerializedName("phone") val phone : String,
+	@SerializedName("phone") val phone : String,
 //	@SerializedName("cell") val cell : String,
 //	@SerializedName("id") val id : Id,
 	@SerializedName("picture") val picture : Picture,
 	@SerializedName("nat") val nat : String
-)
+) : Parcelable
